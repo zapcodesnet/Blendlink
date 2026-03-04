@@ -1,0 +1,26 @@
+# Render deployment configuration for BlendLink Backend
+# Uses its OWN dedicated MongoDB cluster (separate from Zapcodes)
+services:
+  - type: web
+    name: blendlink-api
+    runtime: python
+    region: oregon
+    plan: starter
+    buildCommand: cd backend && pip install -r requirements.txt
+    startCommand: cd backend && uvicorn server:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    envVars:
+      - key: MONGODB_URI
+        sync: false  # Paste your BlendLink cluster connection string
+      - key: JWT_SECRET
+        generateValue: true
+      - key: JWT_EXPIRY_HOURS
+        value: "24"
+      - key: STRIPE_SECRET_KEY
+        sync: false
+      - key: STRIPE_PUBLISHABLE_KEY
+        sync: false
+      - key: CORS_ORIGINS
+        sync: false  # Set to your Cloudflare Pages URL
+      - key: PYTHON_VERSION
+        value: "3.11.0"
