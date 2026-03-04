@@ -1,0 +1,1624 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
+
+/* Premium Light Mode Design System */
+@import './styles/premium-design-system.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Force hide any Emergent badge */
+#emergent-badge,
+[id*="emergent"],
+a[href*="emergent.sh"],
+div[class*="emergent"] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  overflow: hidden !important;
+  position: absolute !important;
+  left: -9999px !important;
+}
+
+:root {
+  --background: 210 40% 98%;
+  --foreground: 222.2 47.4% 11.2%;
+  --card: 0 0% 100%;
+  --card-foreground: 222.2 47.4% 11.2%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 222.2 47.4% 11.2%;
+  --primary: 221.2 83.2% 53.3%;
+  --primary-foreground: 210 40% 98%;
+  --secondary: 210 40% 96.1%;
+  --secondary-foreground: 222.2 47.4% 11.2%;
+  --muted: 210 40% 96.1%;
+  --muted-foreground: 215.4 16.3% 46.9%;
+  --accent: 210 40% 96.1%;
+  --accent-foreground: 222.2 47.4% 11.2%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 210 40% 98%;
+  --border: 214.3 31.8% 91.4%;
+  --input: 214.3 31.8% 91.4%;
+  --ring: 221.2 83.2% 53.3%;
+  --radius: 0.75rem;
+  --bl-coin: 47.9 95.8% 53.1%;
+  --safe-area-inset-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+.dark {
+  --background: 222.2 84% 4.9%;
+  --foreground: 210 40% 98%;
+  --card: 222.2 84% 4.9%;
+  --card-foreground: 210 40% 98%;
+  --popover: 222.2 84% 4.9%;
+  --popover-foreground: 210 40% 98%;
+  --primary: 217.2 91.2% 59.8%;
+  --primary-foreground: 222.2 47.4% 11.2%;
+  --secondary: 217.2 32.6% 17.5%;
+  --secondary-foreground: 210 40% 98%;
+  --muted: 217.2 32.6% 17.5%;
+  --muted-foreground: 215 20.2% 65.1%;
+  --accent: 217.2 32.6% 17.5%;
+  --accent-foreground: 210 40% 98%;
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 210 40% 98%;
+  --border: 217.2 32.6% 17.5%;
+  --input: 217.2 32.6% 17.5%;
+  --ring: 224.3 76.3% 48%;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  /* Critical for smooth mobile scrolling */
+  -webkit-tap-highlight-color: transparent;
+  -webkit-overflow-scrolling: touch !important;
+  touch-action: manipulation !important;
+  overflow-x: hidden !important;
+  overflow-y: scroll !important;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+  min-height: 100dvh;
+  /* Critical: Enable smooth momentum scrolling */
+  -webkit-overflow-scrolling: touch !important;
+  overflow-y: scroll !important;
+  overflow-x: hidden !important;
+  /* Allow natural overscroll behavior */
+  overscroll-behavior: auto !important;
+  /* Ensure touch scrolling works - use auto for max compatibility */
+  touch-action: manipulation !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Manrope', sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* BL Coin gradient */
+.bl-coin-gradient {
+  background: linear-gradient(135deg, hsl(47.9 95.8% 53.1%) 0%, hsl(28 95.8% 53.1%) 100%);
+}
+
+.bl-coin-text {
+  background: linear-gradient(135deg, hsl(47.9 95.8% 53.1%) 0%, hsl(28 95.8% 53.1%) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Glass effect */
+.glass {
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  background: hsla(var(--background) / 0.8);
+}
+
+.glass-card {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  background: hsla(var(--card) / 0.9);
+  border: 1px solid hsla(var(--border) / 0.5);
+}
+
+/* Bottom navigation safe area */
+.bottom-nav {
+  padding-bottom: calc(0.5rem + var(--safe-area-inset-bottom));
+}
+
+/* Smooth transitions for interactive elements - Allow scroll passthrough */
+button, a, input, textarea, select {
+  transition: background-color 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+  /* Critical: Allow vertical scrolling to pass through */
+  touch-action: manipulation;
+}
+
+button:active, a:active {
+  transform: scale(0.97);
+}
+
+/* Touch-friendly targets - Allow scroll passthrough */
+.touch-target {
+  min-height: 44px;
+  min-width: 44px;
+  touch-action: manipulation;
+}
+
+/* Story circle */
+.story-ring {
+  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+  padding: 3px;
+  border-radius: 50%;
+}
+
+.story-ring-inner {
+  background: hsl(var(--background));
+  padding: 2px;
+  border-radius: 50%;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 0 0 hsla(var(--bl-coin) / 0.4); }
+  50% { box-shadow: 0 0 20px 5px hsla(var(--bl-coin) / 0.2); }
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.4s ease-out forwards;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.animate-spin-slow {
+  animation: spin-slow 3s linear infinite;
+}
+
+/* Stagger children animations */
+.stagger-children > * {
+  animation: fadeIn 0.3s ease-out forwards;
+  opacity: 0;
+}
+
+.stagger-children > *:nth-child(1) { animation-delay: 0.05s; }
+.stagger-children > *:nth-child(2) { animation-delay: 0.1s; }
+.stagger-children > *:nth-child(3) { animation-delay: 0.15s; }
+.stagger-children > *:nth-child(4) { animation-delay: 0.2s; }
+.stagger-children > *:nth-child(5) { animation-delay: 0.25s; }
+.stagger-children > *:nth-child(6) { animation-delay: 0.3s; }
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted-foreground) / 0.3);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground) / 0.5);
+}
+
+/* Hide scrollbar for horizontal scroll areas */
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Card hover effects */
+.card-hover {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+/* PWA install banner */
+.pwa-install-banner {
+  background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(221.2 83.2% 43.3%) 100%);
+}
+
+/* ==================== MOBILE-FIRST RESPONSIVE OPTIMIZATIONS ==================== */
+
+/* NOTE: Global scrolling rules are consolidated at the bottom of this file 
+   in the "GLOBAL SCROLLING FIX v3" section. Avoid duplicating rules here. */
+
+/* Photo card specific - ensure scrolling works when touching cards */
+.touch-pan-y {
+  touch-action: manipulation !important;
+}
+
+/* Make flip button have proper touch target */
+button[class*="flip"], [data-flip-trigger] {
+  touch-action: manipulation !important;
+  min-height: 44px;
+  min-width: 44px;
+}
+
+/* Specific fix for iOS scroll issues */
+@supports (-webkit-touch-callout: none) {
+  html, body {
+    position: relative;
+    min-height: 100%;
+  }
+}
+
+/* Mobile-optimized typography */
+@media (max-width: 640px) {
+  html {
+    font-size: 15px;
+  }
+  
+  h1 {
+    font-size: 1.875rem !important;
+    line-height: 1.2;
+  }
+  
+  h2 {
+    font-size: 1.5rem !important;
+    line-height: 1.25;
+  }
+  
+  h3 {
+    font-size: 1.125rem !important;
+    line-height: 1.3;
+  }
+  
+  p, .text-base {
+    font-size: 0.9375rem;
+    line-height: 1.6;
+  }
+  
+  .text-lg {
+    font-size: 1rem;
+  }
+  
+  .text-xl {
+    font-size: 1.125rem;
+  }
+}
+
+/* Touch-optimized buttons on mobile */
+@media (max-width: 640px) {
+  button, .btn, [role="button"] {
+    min-height: 44px;
+    min-width: 44px;
+    padding: 0.75rem 1.25rem;
+  }
+  
+  /* Ensure tap targets have enough spacing */
+  .space-x-2 > * {
+    margin-left: 0.625rem;
+  }
+  
+  .gap-2 {
+    gap: 0.625rem;
+  }
+  
+  .gap-3 {
+    gap: 0.875rem;
+  }
+  
+  .gap-4 {
+    gap: 1rem;
+  }
+}
+
+/* Mobile-optimized cards */
+@media (max-width: 640px) {
+  .rounded-xl {
+    border-radius: 0.75rem;
+  }
+  
+  .rounded-2xl {
+    border-radius: 1rem;
+  }
+  
+  .rounded-3xl {
+    border-radius: 1.25rem;
+  }
+  
+  /* Card padding reduction on mobile */
+  .p-4 {
+    padding: 0.875rem;
+  }
+  
+  .p-6 {
+    padding: 1rem;
+  }
+  
+  .p-8 {
+    padding: 1.25rem;
+  }
+}
+
+/* Mobile-optimized sections */
+@media (max-width: 640px) {
+  section {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  .py-20 {
+    padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
+  }
+  
+  .py-12 {
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+  }
+}
+
+/* Mobile-optimized grid layouts */
+@media (max-width: 640px) {
+  .grid-cols-2 {
+    gap: 0.75rem;
+  }
+  
+  .grid-cols-3 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+  }
+  
+  .grid-cols-4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+  }
+}
+
+/* Mobile-optimized navigation */
+@media (max-width: 640px) {
+  .bottom-nav {
+    padding: 0.5rem 0.75rem calc(0.5rem + var(--safe-area-inset-bottom));
+  }
+  
+  .bottom-nav button {
+    padding: 0.5rem;
+    min-height: 48px;
+    min-width: 48px;
+  }
+}
+
+/* Safe area support for notched phones */
+@supports (padding: max(0px)) {
+  .safe-top {
+    padding-top: max(0.5rem, env(safe-area-inset-top));
+  }
+  
+  .safe-bottom {
+    padding-bottom: max(0.5rem, env(safe-area-inset-bottom));
+  }
+  
+  .safe-left {
+    padding-left: max(1rem, env(safe-area-inset-left));
+  }
+  
+  .safe-right {
+    padding-right: max(1rem, env(safe-area-inset-right));
+  }
+}
+
+/* Smooth scrolling with momentum on iOS */
+.scroll-smooth-ios {
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+}
+
+/* Video responsive container */
+.video-container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.video-container video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Mobile video adjustments */
+@media (max-width: 640px) {
+  .video-container {
+    border-radius: 0.75rem;
+    margin: 0 -0.5rem;
+    width: calc(100% + 1rem);
+  }
+}
+
+/* Carousel/horizontal scroll improvements */
+.horizontal-scroll {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  gap: 1rem;
+  padding-bottom: 0.5rem;
+}
+
+.horizontal-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.horizontal-scroll > * {
+  scroll-snap-align: start;
+  flex-shrink: 0;
+}
+
+/* Mobile card widths in carousels */
+@media (max-width: 640px) {
+  .carousel-card {
+    width: 75vw;
+    max-width: 280px;
+  }
+}
+
+@media (min-width: 641px) {
+  .carousel-card {
+    width: 18rem;
+  }
+}
+
+/* Loading spinner */
+.loading-spinner {
+  border: 3px solid transparent;
+  border-top-color: hsl(var(--primary));
+  border-radius: 50%;
+  width: 2rem;
+  height: 2rem;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Pull to refresh visual feedback */
+.pull-indicator {
+  transition: transform 0.2s ease-out;
+}
+
+.pull-indicator.active {
+  transform: translateY(40px);
+}
+
+/* Image lazy loading placeholder */
+.img-placeholder {
+  background: linear-gradient(90deg, 
+    hsl(var(--muted)) 0%,
+    hsl(var(--muted-foreground) / 0.1) 50%,
+    hsl(var(--muted)) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  from { background-position: 200% 0; }
+  to { background-position: -200% 0; }
+}
+
+/* Focus visible for accessibility */
+:focus-visible {
+  outline: 2px solid hsl(var(--primary));
+  outline-offset: 2px;
+}
+
+/* Reduced motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Spin wheel */
+.spin-wheel {
+  transition: transform 4s cubic-bezier(0.17, 0.67, 0.12, 0.99);
+}
+
+/* Scratch card */
+.scratch-revealed {
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+/* Memory card flip */
+.memory-card {
+  perspective: 1000px;
+}
+
+.memory-card-inner {
+  transition: transform 0.5s ease;
+  transform-style: preserve-3d;
+}
+
+.memory-card.flipped .memory-card-inner {
+  transform: rotateY(180deg);
+}
+
+.memory-card-front, .memory-card-back {
+  backface-visibility: hidden;
+}
+
+.memory-card-back {
+  transform: rotateY(180deg);
+}
+
+/* Loading skeleton */
+.skeleton {
+  background: linear-gradient(90deg, hsl(var(--muted)) 25%, hsl(var(--muted-foreground) / 0.1) 50%, hsl(var(--muted)) 75%);
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s ease-in-out infinite;
+}
+
+@keyframes skeleton-loading {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Input focus ring */
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  ring: 2px;
+  ring-color: hsl(var(--ring));
+}
+
+/* Safe area for notch devices */
+@supports (padding: env(safe-area-inset-top)) {
+  .safe-top {
+    padding-top: env(safe-area-inset-top);
+  }
+  .safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
+
+/* Message bubble */
+.message-sent {
+  background: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+  border-radius: 18px 18px 4px 18px;
+}
+
+.message-received {
+  background: hsl(var(--muted));
+  color: hsl(var(--foreground));
+  border-radius: 18px 18px 18px 4px;
+}
+
+/* Typing indicator */
+.typing-dot {
+  animation: typing-bounce 1.4s infinite ease-in-out both;
+}
+
+.typing-dot:nth-child(1) { animation-delay: -0.32s; }
+.typing-dot:nth-child(2) { animation-delay: -0.16s; }
+
+@keyframes typing-bounce {
+  0%, 80%, 100% { transform: scale(0.6); opacity: 0.5; }
+  40% { transform: scale(1); opacity: 1; }
+}
+
+/* ============================================
+   RTL (Right-to-Left) Language Support
+   ============================================ */
+
+/* Global RTL adjustments */
+[dir="rtl"] {
+  text-align: right;
+}
+
+[dir="rtl"] .flex {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .flex-row {
+  flex-direction: row-reverse;
+}
+
+/* Keep flex-col as column in RTL */
+[dir="rtl"] .flex-col {
+  flex-direction: column;
+}
+
+/* Reverse margins and paddings for RTL */
+[dir="rtl"] .ml-auto {
+  margin-left: 0;
+  margin-right: auto;
+}
+
+[dir="rtl"] .mr-auto {
+  margin-right: 0;
+  margin-left: auto;
+}
+
+[dir="rtl"] .ml-1, [dir="rtl"] .ml-2, [dir="rtl"] .ml-3, [dir="rtl"] .ml-4 {
+  margin-left: 0;
+}
+
+[dir="rtl"] .mr-1, [dir="rtl"] .mr-2, [dir="rtl"] .mr-3, [dir="rtl"] .mr-4 {
+  margin-right: 0;
+}
+
+/* Reverse left/right positioning */
+[dir="rtl"] .left-0 {
+  left: auto;
+  right: 0;
+}
+
+[dir="rtl"] .right-0 {
+  right: auto;
+  left: 0;
+}
+
+[dir="rtl"] .left-4 {
+  left: auto;
+  right: 1rem;
+}
+
+[dir="rtl"] .right-4 {
+  right: auto;
+  left: 1rem;
+}
+
+/* Reverse text alignment */
+[dir="rtl"] .text-left {
+  text-align: right;
+}
+
+[dir="rtl"] .text-right {
+  text-align: left;
+}
+
+/* Keep text-center centered */
+[dir="rtl"] .text-center {
+  text-align: center;
+}
+
+/* Reverse space-x for RTL */
+[dir="rtl"] .space-x-1 > :not([hidden]) ~ :not([hidden]),
+[dir="rtl"] .space-x-2 > :not([hidden]) ~ :not([hidden]),
+[dir="rtl"] .space-x-3 > :not([hidden]) ~ :not([hidden]),
+[dir="rtl"] .space-x-4 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 1;
+}
+
+/* Reverse gap direction (gap-x stays same but items reverse) */
+[dir="rtl"] .gap-1, [dir="rtl"] .gap-2, [dir="rtl"] .gap-3, [dir="rtl"] .gap-4 {
+  /* gap works both ways, handled by flex-direction */
+}
+
+/* Reverse icons that have directional meaning */
+[dir="rtl"] .rtl-flip {
+  transform: scaleX(-1);
+}
+
+/* Message bubbles for RTL */
+[dir="rtl"] .message-sent {
+  border-radius: 18px 18px 18px 4px;
+}
+
+[dir="rtl"] .message-received {
+  border-radius: 18px 18px 4px 18px;
+}
+
+/* Bottom nav for RTL */
+[dir="rtl"] nav.fixed.bottom-0 {
+  direction: rtl;
+}
+
+/* Form inputs text direction */
+[dir="rtl"] input,
+[dir="rtl"] textarea,
+[dir="rtl"] select {
+  text-align: right;
+}
+
+/* Keep numbers LTR in RTL context */
+[dir="rtl"] .ltr-numbers {
+  direction: ltr;
+  unicode-bidi: embed;
+}
+
+/* Price and currency display */
+[dir="rtl"] .price,
+[dir="rtl"] [data-price] {
+  direction: ltr;
+  unicode-bidi: embed;
+}
+
+/* Scrollbar position for RTL */
+[dir="rtl"] .overflow-y-auto,
+[dir="rtl"] .overflow-y-scroll {
+  direction: rtl;
+}
+
+[dir="rtl"] .overflow-y-auto > *,
+[dir="rtl"] .overflow-y-scroll > * {
+  direction: rtl;
+}
+
+/* Cards grid stays same layout */
+[dir="rtl"] .grid {
+  direction: rtl;
+}
+
+/* Carousel navigation */
+[dir="rtl"] .carousel-next {
+  left: 0;
+  right: auto;
+}
+
+[dir="rtl"] .carousel-prev {
+  right: 0;
+  left: auto;
+}
+
+/* Progress bars */
+[dir="rtl"] .progress-bar {
+  transform-origin: right;
+}
+
+/* Checkboxes and radios */
+[dir="rtl"] input[type="checkbox"],
+[dir="rtl"] input[type="radio"] {
+  margin-left: 0.5rem;
+  margin-right: 0;
+}
+
+/* Icons in buttons */
+[dir="rtl"] button .lucide,
+[dir="rtl"] a .lucide {
+  margin-left: 0.5rem;
+  margin-right: 0;
+}
+
+/* Fix specific components */
+[dir="rtl"] .bottom-nav {
+  flex-direction: row-reverse;
+}
+
+/* Animations that need RTL awareness */
+[dir="rtl"] .slide-in-right {
+  animation-name: slideInLeft;
+}
+
+[dir="rtl"] .slide-in-left {
+  animation-name: slideInRight;
+}
+
+@keyframes slideInLeft {
+  from { transform: translateX(-100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slideInRight {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+/* ============================================
+   60FPS ANIMATION & GPU ACCELERATION
+   ============================================ */
+
+/* Force GPU acceleration for smooth animations */
+.gpu-accelerate,
+[class*="animate-"],
+.motion-safe\:animate-*,
+[data-animated="true"] {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+  will-change: transform, opacity;
+}
+
+/* Optimized motion primitives for Framer Motion */
+.framer-motion-optimized {
+  transform: translate3d(0, 0, 0);
+  will-change: transform;
+}
+
+/* High-performance image rendering */
+img,
+.lazy-image {
+  content-visibility: auto;
+  contain-intrinsic-size: 200px 200px;
+}
+
+/* Optimized image loading with GPU layers */
+img[loading="lazy"] {
+  transform: translateZ(0);
+  will-change: opacity;
+}
+
+/* Ensure tap and scroll don't jank */
+.tap-target,
+button,
+a,
+[role="button"] {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* Optimized scrolling containers */
+.scroll-container,
+.overflow-y-auto,
+.overflow-x-auto,
+[class*="overflow-"] {
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+  overscroll-behavior: contain;
+}
+
+/* Disable scroll-behavior during rapid interactions */
+.scrolling-fast * {
+  scroll-behavior: auto !important;
+}
+
+/* Optimized card transitions - use transform only */
+.card-smooth {
+  transition: transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              opacity 0.2s ease;
+  will-change: transform;
+}
+
+.card-smooth:hover {
+  transform: translateY(-4px) translateZ(0);
+}
+
+.card-smooth:active {
+  transform: scale(0.98) translateZ(0);
+}
+
+/* Optimized button press animations */
+.btn-press {
+  transition: transform 0.1s ease;
+  will-change: transform;
+}
+
+.btn-press:active {
+  transform: scale(0.95) translateZ(0);
+}
+
+/* Photo grid optimizations for game */
+.photo-grid {
+  contain: layout style;
+  content-visibility: auto;
+}
+
+.photo-grid-item {
+  contain: layout style paint;
+  transform: translateZ(0);
+}
+
+/* Game-specific performance */
+.tapping-arena {
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
+  transform: translateZ(0);
+  will-change: contents;
+}
+
+.tap-zone {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  touch-action: manipulation;
+}
+
+/* Progress bar optimizations */
+.progress-animated {
+  will-change: width;
+  transform: translateZ(0);
+}
+
+/* Meter/gauge animations */
+.meter-fill {
+  will-change: height, transform;
+  transform-origin: bottom center;
+  transition: height 0.1s linear;
+}
+
+/* Confetti and particle system optimization */
+.particle-container {
+  contain: strict;
+  pointer-events: none;
+}
+
+.particle {
+  will-change: transform, opacity;
+  transform: translate3d(0, 0, 0);
+}
+
+/* WebSocket status indicators - no layout shift */
+.status-indicator {
+  contain: strict;
+  width: 8px;
+  height: 8px;
+}
+
+/* Battle arena optimizations */
+.battle-card {
+  transform: translateZ(0);
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+.battle-result {
+  transform: scale(1) translateZ(0);
+  will-change: transform, opacity;
+}
+
+/* Countdown animation optimization */
+.countdown-number {
+  will-change: transform, opacity;
+  transform: translateZ(0);
+}
+
+/* Dollar meter animation */
+.dollar-meter {
+  will-change: height;
+  transform: translateZ(0);
+  contain: strict;
+}
+
+/* Optimized modal/overlay transitions */
+.modal-overlay {
+  will-change: opacity;
+  transform: translateZ(0);
+}
+
+.modal-content {
+  will-change: transform, opacity;
+  transform: translate3d(-50%, -50%, 0);
+}
+
+/* Reduce paint on hover states */
+@media (hover: hover) {
+  .hover-lift {
+    transition: transform 0.2s ease;
+    will-change: transform;
+  }
+  
+  .hover-lift:hover {
+    transform: translateY(-2px) translateZ(0);
+  }
+}
+
+/* Mobile touch feedback optimization */
+@media (hover: none) {
+  .touch-feedback {
+    -webkit-tap-highlight-color: transparent;
+    transition: transform 0.1s ease;
+  }
+  
+  .touch-feedback:active {
+    transform: scale(0.97) translateZ(0);
+  }
+}
+
+/* Optimized skeleton loading */
+.skeleton-optimized {
+  background: linear-gradient(
+    90deg,
+    hsl(var(--muted)) 0%,
+    hsl(var(--muted-foreground) / 0.1) 50%,
+    hsl(var(--muted)) 100%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-slide 1.2s ease-in-out infinite;
+  will-change: background-position;
+}
+
+@keyframes skeleton-slide {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Disable animations for users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  .gpu-accelerate,
+  [class*="animate-"] {
+    will-change: auto;
+  }
+}
+
+/* Optimized pulse animation for tap indicator */
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1) translateZ(0);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.2) translateZ(0);
+    opacity: 0.9;
+  }
+}
+
+/* Fast scale animation for reactive elements */
+@keyframes scale-bounce {
+  0%, 100% {
+    transform: scale(1) translateZ(0);
+  }
+  50% {
+    transform: scale(1.1) translateZ(0);
+  }
+}
+
+/* Win celebration animation */
+@keyframes winner-pulse {
+  0%, 100% {
+    text-shadow: 0 0 10px gold;
+    transform: scale(1);
+  }
+  50% {
+    text-shadow: 0 0 30px gold, 0 0 60px gold;
+    transform: scale(1.05);
+  }
+}
+
+.animate-winner {
+  animation: winner-pulse 1s ease-in-out infinite;
+}
+
+/* EmbedSocial Widget Performance Optimizations */
+.embedsocial-hashtag {
+  contain: content;
+  content-visibility: auto;
+  will-change: auto;
+}
+
+/* Prevent widget from blocking main thread scroll */
+.embedsocial-hashtag,
+.embedsocial-hashtag * {
+  touch-action: manipulation pinch-zoom;
+}
+
+/* Ensure smooth scrolling on mobile */
+.embedsocial-hashtag iframe {
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+}
+
+/* Prevent layout shift from widget loading */
+[data-testid="facebook-widget-container"] {
+  contain: layout style;
+  min-height: 450px;
+}
+
+/* Hide any widget loading overlays that cause jank */
+.embedsocial-hashtag .es-loader,
+.embedsocial-hashtag [class*="loader"],
+.embedsocial-hashtag [class*="loading"] {
+  animation-duration: 0.5s !important;
+}
+
+/* ==============================================
+   LANDING PAGE SCROLL FIX - BULLETPROOF SOLUTION
+   ==============================================
+   This is a dedicated fix for the landing page scroll issue.
+   The key principles:
+   1. The container must be the scroll parent
+   2. No fixed/sticky elements can block touch
+   3. All touch events pass through to browser
+*/
+
+.landing-page-scroll-container {
+  /* Make this the scroll container */
+  min-height: 100vh;
+  min-height: 100dvh; /* Dynamic viewport height for mobile */
+  width: 100%;
+  background: hsl(var(--background));
+  
+  /* CRITICAL: Enable scrolling */
+  overflow-x: hidden !important;
+  overflow-y: scroll !important;
+  -webkit-overflow-scrolling: touch !important;
+  
+  /* CRITICAL: Allow touch to scroll - use auto for maximum compatibility */
+  touch-action: manipulation !important;
+  
+  /* Ensure smooth momentum scrolling on iOS */
+  scroll-behavior: auto;
+  overscroll-behavior-y: auto;
+  
+  /* Prevent any transform or will-change that could create new stacking context */
+  transform: none !important;
+  will-change: auto !important;
+  
+  /* Ensure no height constraint blocks scrolling */
+  height: auto !important;
+  max-height: none !important;
+}
+
+/* Reset touch-action on all children to allow inheritance */
+.landing-page-scroll-container *:not(button):not(a):not([role="button"]):not(input):not(select):not(textarea) {
+  touch-action: manipulation !important;
+}
+
+/* Only buttons should capture taps - use manipulation instead of none */
+.landing-page-scroll-container button,
+.landing-page-scroll-container a,
+.landing-page-scroll-container [role="button"],
+.landing-page-scroll-container input,
+.landing-page-scroll-container select,
+.landing-page-scroll-container textarea {
+  touch-action: manipulation !important;
+}
+
+/* Images MUST not block scroll - this is critical */
+.landing-page-scroll-container img,
+.landing-page-scroll-container video,
+.landing-page-scroll-container svg,
+.landing-page-scroll-container picture {
+  pointer-events: none !important;
+  touch-action: manipulation !important;
+  -webkit-user-drag: none !important;
+  user-select: none !important;
+}
+
+/* Ensure the sticky header doesn't break scrolling on iOS */
+.landing-page-scroll-container header.sticky,
+.landing-page-scroll-container .sticky,
+.marketplace-scroll-container header.sticky,
+.marketplace-scroll-container .sticky,
+.minted-photos-scroll-container header.sticky,
+.minted-photos-scroll-container .sticky,
+.photo-game-scroll-container header.sticky,
+.photo-game-scroll-container .sticky {
+  touch-action: manipulation !important;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+}
+
+/* ==============================================
+   MARKETPLACE PAGE SCROLL FIX
+   ============================================== */
+.marketplace-scroll-container {
+  min-height: 100vh;
+  min-height: 100dvh;
+  width: 100%;
+  background: hsl(var(--background));
+  padding-bottom: 5rem;
+  overflow-x: hidden !important;
+  overflow-y: scroll !important;
+  -webkit-overflow-scrolling: touch !important;
+  touch-action: manipulation !important;
+  transform: none !important;
+  will-change: auto !important;
+}
+
+.marketplace-scroll-container *:not(button):not(a):not([role="button"]):not(input):not(select):not(textarea) {
+  touch-action: manipulation !important;
+}
+
+.marketplace-scroll-container button,
+.marketplace-scroll-container a,
+.marketplace-scroll-container [role="button"],
+.marketplace-scroll-container input {
+  touch-action: manipulation !important;
+}
+
+.marketplace-scroll-container img,
+.marketplace-scroll-container video,
+.marketplace-scroll-container svg {
+  pointer-events: none !important;
+  touch-action: manipulation !important;
+  -webkit-user-drag: none !important;
+  user-select: none !important;
+}
+
+/* ==============================================
+   MINTED PHOTOS PAGE SCROLL FIX
+   ============================================== */
+.minted-photos-scroll-container {
+  min-height: 100vh;
+  min-height: 100dvh;
+  width: 100%;
+  background: rgb(17 24 39);
+  padding-bottom: 6rem;
+  /* SCROLL FIX v6: Let body scroll instead of creating inner scroll container */
+  overflow: visible !important;
+  -webkit-overflow-scrolling: touch !important;
+  touch-action: manipulation !important;
+}
+
+/* ALL elements inside container must allow touch passthrough */
+.minted-photos-scroll-container * {
+  touch-action: manipulation !important;
+}
+
+/* Cards and images should not block scrolling */
+.minted-photos-scroll-container img,
+.minted-photos-scroll-container video {
+  pointer-events: none !important;
+  touch-action: manipulation !important;
+  user-select: none !important;
+  -webkit-user-select: none !important;
+  -webkit-touch-callout: none !important;
+}
+
+/* ==============================================
+   PHOTO GAME PAGE SCROLL FIX
+   ============================================== */
+.photo-game-scroll-container {
+  min-height: 100vh;
+  min-height: 100dvh;
+  width: 100%;
+  background: rgb(17 24 39);
+  padding-bottom: 6rem;
+  /* SCROLL FIX v6: Let body scroll instead of creating inner scroll container */
+  overflow: visible !important;
+  -webkit-overflow-scrolling: touch !important;
+  touch-action: manipulation !important;
+}
+
+/* ALL elements inside container must allow touch passthrough */
+.photo-game-scroll-container * {
+  touch-action: manipulation !important;
+}
+
+/* Cards and images should not block scrolling */
+.photo-game-scroll-container img,
+.photo-game-scroll-container video {
+  pointer-events: none !important;
+  touch-action: manipulation !important;
+  user-select: none !important;
+  -webkit-user-select: none !important;
+  -webkit-touch-callout: none !important;
+}
+
+.photo-game-scroll-container button,
+.photo-game-scroll-container a,
+.photo-game-scroll-container [role="button"],
+.photo-game-scroll-container input {
+  touch-action: manipulation !important;
+}
+
+.photo-game-scroll-container img,
+.photo-game-scroll-container video,
+.photo-game-scroll-container svg {
+  pointer-events: none !important;
+  touch-action: manipulation !important;
+  -webkit-user-drag: none !important;
+  user-select: none !important;
+}
+
+/* ==============================================
+   GLOBAL SCROLLING FIX v5 - SINGLE FINGER FIX
+   ============================================== 
+   
+   CRITICAL: The difference between single-finger and two-finger scrolling
+   is that browsers may interpret single-finger as a potential tap/click.
+   
+   SOLUTION: Use touch-action: manipulation (NOT auto) to tell the browser
+   "this element only supports vertical panning - handle it immediately,
+   don't wait to see if it's a tap"
+   
+   RULES:
+   1. Cards and all children: touch-action: manipulation
+   2. Only interactive buttons: touch-action: manipulation
+   3. Images: pointer-events: none (pass through)
+   4. No transform that creates new stacking context should block touch
+*/
+
+/* Root scrolling setup */
+html {
+  overflow-x: hidden !important;
+  overflow-y: scroll !important;
+  -webkit-overflow-scrolling: touch !important;
+  touch-action: manipulation !important;
+  height: auto !important;
+}
+
+body {
+  overflow-x: hidden !important;
+  overflow-y: scroll !important;
+  -webkit-overflow-scrolling: touch !important;
+  overscroll-behavior-y: auto !important;
+  touch-action: manipulation !important;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+/* Make all containers scroll-friendly */
+#root {
+  touch-action: manipulation !important;
+  overflow: visible !important;
+  height: auto !important;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+main, .min-h-screen, section, article {
+  touch-action: manipulation !important;
+}
+
+/* CRITICAL: Images must not capture touch events */
+img, video, svg, picture, canvas {
+  pointer-events: none !important;
+  touch-action: manipulation !important;
+  user-select: none !important;
+  -webkit-user-drag: none !important;
+}
+
+/* Re-enable pointer events on images that need interaction */
+img[data-interactive="true"],
+video[controls],
+canvas[data-interactive="true"] {
+  pointer-events: auto;
+}
+
+/* Grid and flex containers - allow vertical scroll */
+.grid, .flex, .flex-wrap {
+  touch-action: manipulation !important;
+}
+
+/* ==============================================
+   UNIFIED PHOTO CARD - SINGLE FINGER SCROLL FIX v5
+   ==============================================
+   CRITICAL: Use pan-y to enable immediate single-finger scrolling
+   The browser won't wait to determine if it's a tap vs scroll
+*/
+
+/* Photo card wrapper - MUST use pan-y for single finger scroll */
+[data-testid^="photo-card-"] {
+  touch-action: manipulation !important;
+}
+
+/* All card children - pan-y for scroll passthrough */
+[data-testid^="photo-card-"] * {
+  touch-action: manipulation !important;
+}
+
+/* ONLY buttons should have manipulation (tap response without scroll delay) */
+[data-testid^="photo-card-"] button,
+[data-testid^="photo-card-"] a,
+[data-testid^="photo-card-"] [role="button"] {
+  touch-action: manipulation !important;
+}
+
+/* Images are completely non-interactive */
+[data-testid^="photo-card-"] img {
+  pointer-events: none !important;
+  touch-action: manipulation !important;
+}
+
+/* ONLY interactive controls should block pan (use manipulation) */
+button, 
+a, 
+input, 
+textarea, 
+select, 
+[role="button"],
+[data-testid*="btn"],
+[data-testid*="button"] {
+  touch-action: manipulation;
+}
+
+/* Scrollable containers (modals with overflow-y-auto) */
+.overflow-y-auto,
+.overflow-y-scroll,
+[style*="overflow-y: auto"],
+[style*="overflow-y: scroll"] {
+  -webkit-overflow-scrolling: touch;
+  touch-action: manipulation;
+}
+
+/* Horizontal scrollers need pan-x but also pan-y for page scroll */
+.overflow-x-auto,
+.overflow-x-scroll,
+.hide-scrollbar {
+  touch-action: pan-x pan-y;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ==============================================
+   UNIFIED PHOTO CARD CSS ANIMATIONS
+   (Replaces framer-motion to fix touch scrolling)
+   ============================================== */
+
+/* Golden sparkle animation for Level 60 frames */
+@keyframes golden-sparkle-float {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(-50px) scale(1.2);
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+}
+
+.golden-sparkle {
+  animation: golden-sparkle-float 3s ease-in-out infinite;
+}
+
+/* Golden frame pulse animation */
+@keyframes golden-pulse {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(250,204,21,0.4), inset 0 0 15px rgba(250,204,21,0.2);
+  }
+  50% {
+    box-shadow: 0 0 35px rgba(250,204,21,0.6), inset 0 0 25px rgba(250,204,21,0.3);
+  }
+}
+
+.golden-pulse-border {
+  animation: golden-pulse 2s ease-in-out infinite;
+}
+
+/* XP bar fill transition */
+.xp-bar-fill {
+  transition: width 0.8s ease-out;
+}
+
+/* XP bar shimmer effect */
+@keyframes xp-shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.xp-shimmer {
+  animation: xp-shimmer 2s linear infinite;
+}
+
+/* Seniority MAX glow animation */
+@keyframes seniority-glow {
+  0%, 100% {
+    text-shadow: 0 0 4px rgba(250,204,21,0.4);
+  }
+  50% {
+    text-shadow: 0 0 12px rgba(250,204,21,0.8);
+  }
+}
+
+.seniority-glow {
+  animation: seniority-glow 2s ease-in-out infinite;
+}
+
+/* Card flip animation using pure CSS (no framer-motion) */
+.photo-card-flipper {
+  transition: transform 0.5s ease-in-out;
+  transform-style: preserve-3d;
+  /* CRITICAL: pan-y allows single-finger vertical scrolling */
+  touch-action: manipulation !important;
+}
+
+.photo-card-flipper.flipped {
+  transform: rotateY(180deg);
+}
+
+.photo-card-front,
+.photo-card-back {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  /* CRITICAL: pan-y on card faces for scroll passthrough */
+  touch-action: manipulation !important;
+}
+
+.photo-card-back {
+  transform: rotateY(180deg);
+}
+
+/* ==============================================
+   UNIFIED PHOTO CARD - SINGLE FINGER TOUCH v5
+   ==============================================
+   Ensure all card elements allow vertical scrolling
+*/
+
+/* Photo card wrapper - pan-y for single finger */
+[data-testid^="photo-card-"] {
+  touch-action: manipulation !important;
+}
+
+/* All descendants - pan-y */
+[data-testid^="photo-card-"] * {
+  touch-action: manipulation !important;
+}
+
+/* Only buttons need manipulation for tap without delay */
+[data-testid^="photo-card-"] button,
+[data-testid^="photo-card-"] a,
+[data-testid^="photo-card-"] [role="button"] {
+  touch-action: manipulation !important;
+}
+
+/* Images completely non-interactive */
+[data-testid^="photo-card-"] img {
+  pointer-events: none !important;
+  touch-action: manipulation !important;
+}
+
+/* Perspective container - pan-y */
+.perspective-1000,
+[class*="perspective"] {
+  touch-action: manipulation !important;
+}
+
+/* Golden frame wrapper - pan-y */
+.golden-frame-container,
+.golden-frame-container * {
+  touch-action: manipulation !important;
+}
