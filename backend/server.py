@@ -2610,7 +2610,7 @@ async def get_referral_stats(current_user: dict = Depends(get_current_user)):
 
 # ============== FILE UPLOAD ROUTES ==============
 # Ensure uploads directory exists
-UPLOAD_DIR = Path("/app/uploads")
+UPLOAD_DIR = Path("/tmp/uploads")
 UPLOAD_DIR.mkdir(exist_ok=True)
 
 @upload_router.post("/file")
