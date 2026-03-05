@@ -23,7 +23,7 @@ from server import get_current_user, db, logger
 album_router = APIRouter(prefix="/albums", tags=["Albums"])
 
 # Ensure directories exist
-UPLOAD_DIR = Path("/app/uploads")
+UPLOAD_DIR = Path("/tmp/uploads")
 THUMBNAIL_DIR = UPLOAD_DIR / "thumbnails"
 UPLOAD_DIR.mkdir(exist_ok=True)
 THUMBNAIL_DIR.mkdir(exist_ok=True)
