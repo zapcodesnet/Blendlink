@@ -1,8 +1,8 @@
 """
 Blendlink Subscription Tiers System
-- Monthly subscription plans (Bronze $4.99, Silver $9.99, Gold $14.99, Platinum $24.99)
-- Daily BL coin bonuses (15K, 35K, 80K, 200K)
-- Increased minting limits (20, 50, 100, unlimited)
+- Monthly subscription plans (Bronze $4.99, Silver $14.99, Gold $29.99, Diamond $99.99)
+- Daily BL coin bonuses (20K, 80K, 250K, 500K)
+- Increased minting limits (20, 50, 150, unlimited)
 - XP multipliers (x2, x3, x4, x5)
 - Stripe integration for payments
 """
@@ -89,7 +89,7 @@ SUBSCRIPTION_TIERS = {
     },
     "silver": {
         "name": "Silver",
-        "price_monthly": 9.99,
+        "price_monthly": 14.99,
         "stripe_price_id": os.environ.get("STRIPE_SILVER_PRICE_ID"),
         "daily_mint_limit": 50,
         "daily_bl_bonus": 80_000,
@@ -117,10 +117,10 @@ SUBSCRIPTION_TIERS = {
     },
     "gold": {
         "name": "Gold",
-        "price_monthly": 14.99,
+        "price_monthly": 29.99,
         "stripe_price_id": os.environ.get("STRIPE_GOLD_PRICE_ID"),
         "daily_mint_limit": 150,
-        "daily_bl_bonus": 200_000,
+        "daily_bl_bonus": 250_000,
         "xp_multiplier": 4,
         "bonus_streak_multiplier": 1.75,
         "marketplace_fee_discount": 3,
@@ -135,7 +135,7 @@ SUBSCRIPTION_TIERS = {
         "commission_l2_rate": 0.02,
         "features": [
             "150 photo mints per day",
-            "200,000 BL daily claim",
+            "250,000 BL daily claim",
             "4x XP per round",
             "25 member pages",
             "25,000 listings per month",
@@ -145,7 +145,7 @@ SUBSCRIPTION_TIERS = {
     },
     "diamond": {
         "name": "Diamond",
-        "price_monthly": 29.99,
+        "price_monthly": 99.99,
         "stripe_price_id": os.environ.get("STRIPE_DIAMOND_PRICE_ID"),
         "daily_mint_limit": 999999,
         "daily_bl_bonus": 500_000,
