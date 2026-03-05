@@ -1797,8 +1797,8 @@ async def generate_ai_video(prompt: str, duration: int = 6) -> dict:
     
     if video_bytes:
         # Save to temp file and return path
-        output_path = f"/app/uploads/ai_video_{uuid.uuid4().hex[:12]}.mp4"
-        os.makedirs("/app/uploads", exist_ok=True)
+        output_path = f"/tmp/uploads/ai_video_{uuid.uuid4().hex[:12]}.mp4"
+        os.makedirs("/tmp/uploads", exist_ok=True)
         video_gen.save_video(video_bytes, output_path)
         
         video_base64 = base64.b64encode(video_bytes).decode('utf-8')
