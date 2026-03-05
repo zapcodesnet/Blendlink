@@ -19,13 +19,27 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# Import Stripe checkout from emergentintegrations
-from emergentintegrations.payments.stripe.checkout import (
-    StripeCheckout, 
-    CheckoutSessionResponse, 
-    CheckoutStatusResponse, 
-    CheckoutSessionRequest
-)
+# Stub classes — replaces emergentintegrations (not available on Render)
+try:
+    from emergentintegrations.payments.stripe.checkout import (
+        StripeCheckout, CheckoutSessionResponse, CheckoutStatusResponse, CheckoutSessionRequest
+    )
+except ImportError:
+    import stripe as _stripe
+    class CheckoutSessionRequest:
+        def __init__(self, **kwargs): [setattr(self, k, v) for k, v in kwargs.items()]
+    class CheckoutSessionResponse:
+        def __init__(self, **kwargs): [setattr(self, k, v) for k, v in kwargs.items()]
+    class CheckoutStatusResponse:
+        def __init__(self, **kwargs): [setattr(self, k, v) for k, v in kwargs.items()]
+    class StripeCheckout:
+        def __init__(self, api_key=None, webhook_url=None): _stripe.api_key = api_key
+        async def create_session(self, request):
+            session = _stripe.checkout.Session.create(line_items=[{"price_data": {"currency": getattr(request, 'currency', 'usd'), "product_data": {"name": getattr(request, 'product_name', 'Purchase')}, "unit_amount": int(float(getattr(request, 'amount', 0)) * 100)}, "quantity": 1}], mode="payment", success_url=getattr(request, 'success_url', ''), cancel_url=getattr(request, 'cancel_url', ''), metadata=getattr(request, 'metadata', {}))
+            return CheckoutSessionResponse(session_id=session.id, url=session.url, status="created")
+        async def get_session_status(self, session_id):
+            session = _stripe.checkout.Session.retrieve(session_id)
+            return CheckoutStatusResponse(session_id=session.id, status=session.payment_status, payment_status=session.payment_status)
 
 # Database connection
 def get_mongo_connection():
