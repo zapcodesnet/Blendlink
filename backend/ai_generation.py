@@ -222,7 +222,7 @@ async def process_video_generation(
                     # Save thumbnail
                     import base64
                     thumbnail_filename = f"{generation_id}_thumb.png"
-                    thumbnail_path = f"/app/frontend/public/generated/{thumbnail_filename}"
+                    thumbnail_path = f"/tmp/generated/{thumbnail_filename}"
                     os.makedirs(os.path.dirname(thumbnail_path), exist_ok=True)
                     
                     with open(thumbnail_path, 'wb') as f:
@@ -256,7 +256,7 @@ async def process_video_generation(
         if video_bytes:
             # Save video
             video_filename = f"{generation_id}.mp4"
-            video_path = f"/app/frontend/public/generated/{video_filename}"
+            video_path = f"/tmp/generated/{video_filename}"
             
             # Ensure directory exists
             os.makedirs(os.path.dirname(video_path), exist_ok=True)
@@ -443,7 +443,7 @@ async def generate_music_params(
                 if images and len(images) > 0:
                     import base64
                     cover_filename = f"{generation_id}_cover.png"
-                    cover_path = f"/app/frontend/public/generated/{cover_filename}"
+                    cover_path = f"/tmp/generated/{cover_filename}"
                     os.makedirs(os.path.dirname(cover_path), exist_ok=True)
                     
                     with open(cover_path, 'wb') as f:
@@ -531,17 +531,17 @@ async def delete_generation(
     import os
     if generation.get("video_url"):
         try:
-            os.remove(f"/app/frontend/public{generation['video_url']}")
+            os.remove(f"/tmp{generation['video_url']}")
         except:
             pass
     if generation.get("thumbnail_url"):
         try:
-            os.remove(f"/app/frontend/public{generation['thumbnail_url']}")
+            os.remove(f"/tmp{generation['thumbnail_url']}")
         except:
             pass
     if generation.get("cover_art_url"):
         try:
-            os.remove(f"/app/frontend/public{generation['cover_art_url']}")
+            os.remove(f"/tmp{generation['cover_art_url']}")
         except:
             pass
     
