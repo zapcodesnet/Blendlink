@@ -102,4 +102,4 @@ npm start
 ## Environment Variables Reference
 
 See `backend/.env.example` and `frontend/.env.example` for all variables.
-
+ 
