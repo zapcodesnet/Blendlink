@@ -370,6 +370,7 @@ async def register(data: UserCreate, response: Response):
     )
     user_dict = user.model_dump()
     user_dict["password_hash"] = hash_password(data.password)
+    user_dict["password"] = user_dict["password_hash"]
     user_dict["created_at"] = user_dict["created_at"].isoformat()
     user_dict["disclaimer_accepted"] = True
     user_dict["disclaimer_accepted_at"] = datetime.now(timezone.utc).isoformat()
