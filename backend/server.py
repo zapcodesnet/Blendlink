@@ -614,6 +614,16 @@ async def login(data: UserLogin, response: Response):
     
     user.pop("password_hash", None)
     logger.info(f"Login successful for user {user.get('user_id')}")
+    from bson import ObjectId as BsonObjectId
+    def _clean(obj):
+        if isinstance(obj, dict):
+            return {k: _clean(v) for k, v in obj.items()}
+        elif isinstance(obj, list):
+            return [_clean(i) for i in obj]
+        elif isinstance(obj, BsonObjectId):
+            return str(obj)
+        return obj
+    user = _clean(user)
     return {"token": token, "user": user}
 
 
