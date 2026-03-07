@@ -3943,7 +3943,7 @@ async def kubernetes_health_check():
 app.add_middleware(
     CORSMiddleware,
     allow_credentials=True,
-    allow_origins=[o.strip() for o in os.environ.get('CORS_ORIGINS', 'http://localhost:3000').split(',') if o.strip()],
+    allow_origins=["https://blendlink.net","https://www.blendlink.net","https://blendlink-web.pages.dev","http://localhost:3000"] + [o.strip() for o in os.environ.get('CORS_ORIGINS', '').split(',') if o.strip()],
     allow_methods=["*"],
     allow_headers=["*"],
 )
