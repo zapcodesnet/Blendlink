@@ -766,7 +766,7 @@ async def claim_daily_bl(current_user: dict = Depends(get_current_user)) -> Dail
     - Diamond Leaders: 5,000 BL every 24 hours
     """
     user_id = current_user["user_id"]
-    user = await db.users.find_one({"user_id": user_id})
+    user = await db.users.find_one({"user_id": user_id}, {"_id": 0})
     
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
