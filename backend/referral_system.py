@@ -772,7 +772,7 @@ async def claim_daily_bl(current_user: dict = Depends(get_current_user)) -> Dail
         raise HTTPException(status_code=404, detail="User not found")
     
     # Check cooldown
-    last_claim = user.get("daily_claim_last")
+    last_claim = user.get("daily_claim_last") or user.get("last_daily_claim")
     now = datetime.now(timezone.utc)
     
     if last_claim:
@@ -810,7 +810,7 @@ async def claim_daily_bl(current_user: dict = Depends(get_current_user)) -> Dail
     # Update last claim time
     await db.users.update_one(
         {"user_id": user_id},
-        {"$set": {"daily_claim_last": now.isoformat()}}
+        {"$set": {"daily_claim_last": now.isoformat(), "last_daily_claim": now}}
     )
     
     # Get updated balance
@@ -844,7 +844,7 @@ async def get_daily_claim_status(current_user: dict = Depends(get_current_user))
     claim_amount = tier_info.get("daily_bl_bonus", 2000)
     
     now = datetime.now(timezone.utc)
-    last_claim = user.get("daily_claim_last") or (sub.get("last_bonus_claimed") if sub else None)
+    last_claim = user.get("daily_claim_last") or user.get("last_daily_claim") or (sub.get("last_bonus_claimed") if sub else None)
     
     can_claim = True
     seconds_remaining = 0
